@@ -3,6 +3,7 @@ import json
 import html
 import re
 
+path = []
 def cleanhtml(raw_html):
   
   cleanr = re.compile('<.*?>')
@@ -26,9 +27,18 @@ def get_directions(origin,destination):
         step_string +=  "\n\n"
     
     directions = cleanhtml(step_string)
-    return directions
+    path.append(directions)
+    while check_repetition()==False:
+        return directions
 
 
+def check_repetition():
+    if len(path)>=2:
+        if path[-1] == path[-2]:
+            return True
+        return False
+    else:
+        return False
 
 
 
